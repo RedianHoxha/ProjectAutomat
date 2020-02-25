@@ -1,0 +1,8 @@
+q0eq0
+q0eq1
+q0aq0
+q1eq1
+q1eq2
+q1bq1
+q2eq2
+q2cq2
