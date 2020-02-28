@@ -44,8 +44,8 @@ namespace TeoriGjuheProjekt
             //a.AfishoKalime();
 
             //a.Konverto(gj1,a1);
-            a.Konvertohappashapi(gj1,a1);
-
+            //a.Konvertohappashapi(gj1,a1);
+            a.KonvertoneAFD(gj1, a1);
              System.Console.ReadLine();
         }
     }

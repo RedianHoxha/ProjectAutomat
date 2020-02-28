@@ -34,9 +34,7 @@ namespace TeoriGjuheProjekt
             }
 
             file.Close();
-            System.Console.WriteLine("Alfabeti i Automatit ka {0} Shkronja.", counter);
       
-
         }
 
         public  string getshkronja(int i)
@@ -44,11 +42,7 @@ namespace TeoriGjuheProjekt
             string shkronjaalfa = alfabeti[i].ToString();
             return shkronjaalfa;
         }
-
-    //    public void Afisho(Alfabet alf)
-    //    {
-    ////       return alf.getshkronja();
-    //    }
+ 
  
         public void AfishoAlfabet()
         {

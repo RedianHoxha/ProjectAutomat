@@ -26,15 +26,6 @@ namespace TeoriGjuheProjekt
             gjendjemberritjes = gjendjemberritje;
         }
 
-        //Gjendje gj = new Gjendje();
-        //Alfabet alfa = new Alfabet();
-        //public void KrijoKalim(int id,string gj1, string alf, string gje2)
-        //{
-        //    IdKalimi = id;
-        //    gjendjanisjes = gj.getgjendja(gj1);
-        //    alfabetkalimi = alfa.getshkronja(alf);
-        //    gjendjemberritjes = gj.getgjendja(gje2);
-        //}
 
         public void KrijoKalim(int id, string gj1, string alf, string gj2)
         {
@@ -48,8 +39,5 @@ namespace TeoriGjuheProjekt
         {
             return "Id : " + IdKalimi + " Gjendja1 : " + gjendjanisjes + " Alfabet : " + alfabetkalimi + " Gjendjafund : " + gjendjemberritjes;
         }
-
-    }
-
-   
+    } 
 }

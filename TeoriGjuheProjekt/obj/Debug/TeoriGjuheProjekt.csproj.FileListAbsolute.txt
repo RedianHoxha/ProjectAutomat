@@ -12,3 +12,10 @@ C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.csprojAssem
 C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.csproj.CoreCompileInputs.cache
 C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.exe
 C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.pdb
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\bin\Debug\TeoriGjuheProjekt.exe.config
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\bin\Debug\TeoriGjuheProjekt.exe
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\bin\Debug\TeoriGjuheProjekt.pdb
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.csprojAssemblyReference.cache
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.csproj.CoreCompileInputs.cache
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.exe
+C:\Github\ProjectAutomat\TeoriGjuheProjekt\obj\Debug\TeoriGjuheProjekt.pdb
