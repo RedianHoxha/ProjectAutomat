@@ -62,7 +62,7 @@ namespace TeoriGjuheProjekt
                   string line;
 
                 // Read the file and display it line by line.  
-                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\Prov\Kalimet.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\Prov\Kalimet2.txt");
                     while ((line = file.ReadLine()) != null)
                     {
                             string gjendje1, shkralfabet, gjendjefund;
@@ -310,91 +310,222 @@ namespace TeoriGjuheProjekt
 
 
         public void KonvertoneAFD(Gjendje gjendjetautomatit, Alfabet alfabetiautomatit)
-        {
+         {
             Kalimet kalimetObject = new Kalimet();
             ArrayList arrayrastiq0 = new ArrayList();
             ArrayList arraytemporare = new ArrayList();
             ArrayList Arrayperfundimtar = new ArrayList();
+            ArrayList arraypasafd = new ArrayList();
+            ArrayList historiku = new ArrayList();
 
             string gjendjafillestare = gjendjetautomatit.getgjendja(0);
             string eps = "e";
-            string gjendje = "";
-            string gjendjepaalfabet="";
+            List <string> gjendje = new List<string>();
+            string gjendjepaalfabetit="";
 
             arrayrastiq0 = kontrollpernjegjendje(gjendjafillestare, eps, alfabetiautomatit);
 
             Arrayperfundimtar.Add("q0");
-
-            foreach (var i in arrayrastiq0)//konverton ne stringje dy gjenjdet qe dalin nga q0 me a dhe b dhe kthen "arraytemporare"
+            historiku.Add("q0");
+            foreach (var i in arrayrastiq0)//konverton ne stringje dy gjenjdet qe dalin nga q0 me a dhe b dhe kthen i  shton ato ne nje array temporare.
             {
                 string gjendjeperf = (string)i;
 
                 if (gjendjeperf == "a" || gjendjeperf=="b")
                 {
-                    arraytemporare.Add(gjendje);
-                    gjendje = "";
-                   
+
+                    gjendje.Sort();
+                    string gjendjenew = string.Join("", gjendje);
+                    arraytemporare.Add(gjendjenew);
+                    historiku.Add(gjendjenew);
+                    gjendje = new List<string>();
                 }
                 else
                 {
-                    gjendje = gjendje + gjendjeperf;
+                    gjendje.Add(gjendjeperf);
                 }
 
             }
 
-             foreach (var i in arraytemporare)
+           
+
+            do
             {
-                string gjendja = (string)i;
-                int gjatesia = gjendja.Length;
-                int poz = 0;
-                string gjenjereqeformohet = "";
-
-                foreach (var j in alfabetiautomatit.alfabeti)//per cdo dhkronje alfabeti kontrollojme nese rgjendje te arrayt t kthyer shkojne diku me kete shkronje alfabeti
+                for (int i=0;i<arraytemporare.Count;i++)
                 {
-                    if ((string)j != "e")
+                    //arraytemporare = konvertolisttostring(arraytemporare);
+
+                    string gjendja = (string)arraytemporare[i];
+                    int gjatesia = gjendja.Length;
+                    int poz = 0;
+                    List <string> gjendjereqeformohet = new List<string>();
+
+                    if (Arrayperfundimtar.Contains(gjendja))
                     {
-                        poz = 0;
-                        string shkronja = (string)j;
-                        while (poz <= gjatesia)
-                        {
-                            string gjen = gjendja.Substring(poz, 2);
-
-                            //foreach (var aut in Automati)
-                            //{
-                            //    kalimetObject = (Kalimet)aut;
-                            //    if (gjen == kalimetObject.gjendjanisjes)
-                            //    {
-                            //        if (kalimetObject.alfabetkalimi == shkronja)
-                            //        {
-                            //            if (!gjenjereqeformohet.Contains(kalimetObject.gjendjemberritjes))
-                            //            {
-                            //                gjenjereqeformohet = gjenjereqeformohet + kalimetObject.gjendjemberritjes;
-
-                            //            }
-                            //        }
-                            //    }
-                            //}
-                            poz = poz + 2;
-                        }
-                        gjenjereqeformohet.OrderBy(c => c);
-                        arraytemporare.Add(gjenjereqeformohet);
-
+                        arraytemporare.Remove(gjendja);
+                        i--;
                     }
-                }
+                    else
+                    {
+                        foreach (var j in alfabetiautomatit.alfabeti)//per cdo dhkronje alfabeti kontrollojme nese rgjendje te arrayt t kthyer shkojne diku me kete shkronje alfabeti
+                        {
+                            if ((string)j != "e")
+                            {
+                                poz = 0;
+                                string shkronja = (string)j;
+                                while (poz < gjatesia)
+                                {
+                                    string gjen = gjendja.Substring(poz, 2);
 
-                if (Arrayperfundimtar.Contains(gjendja))
-                {
-                    arraytemporare.Remove(gjendja);
-                }
-                else
-                {
-                    Arrayperfundimtar.Add(gjendja);
-                    arraytemporare.Remove(gjendja);
-                }
+                                    arraypasafd = kontrollpernjegjendjeAFD(gjen, eps, (string)j);//kthejme afd per gjendjen e dhene.
 
+                                    gjendjereqeformohet = Kthenefjale(gjendjereqeformohet, arraypasafd);//arrayne kthyer e kthejme ne string
+
+                                    poz = poz + 2;
+                                }
+                                string gjendjaqeformohetnew = string.Join("", gjendjereqeformohet);
+                                arraytemporare.Add(gjendjaqeformohetnew);
+                                historiku.Add(gjendja);
+                                historiku.Add((string)j);
+                                historiku.Add(gjendjaqeformohetnew);
+                                gjendjereqeformohet = new List<string>();
+
+                            }
+                        }
+                        Arrayperfundimtar.Add(gjendja);
+                        arraytemporare.Remove(gjendja);
+
+                        i--;
+                    }
+                   
+
+                }
+            } while (arraytemporare.Count != 0);
+
+
+
+         foreach(var i in historiku)
+            {
+                Console.WriteLine((string)i);
             }
         }
 
+
+        public ArrayList konvertolisttostring(ArrayList arraytemporare)
+        {
+
+            for (int i = 0; i < arraytemporare.Count; i++)
+            {
+                List<string> gjendjalist = (List<string>)arraytemporare[i];
+                string gjendja = string.Join("", gjendjalist);
+                arraytemporare[i] = gjendja;
+            }
+
+            return arraytemporare;
+        }
+
+        public ArrayList kontrollpernjegjendjeAFD(string gjen, string eps, string alfabetiautomatit)
+        {
+            Gjendje gjendje;
+            ArrayList gjendjeeeee = new ArrayList();
+            ArrayList pasalfabetit = new ArrayList();
+            ArrayList pasepsilon2 = new ArrayList();
+            Kalimet kalimetObject = new Kalimet();
+            Alfabet alfabetiim = new Alfabet();
+            ArrayList Arraiperfundimtarpershkronje = new ArrayList();
+
+            bool ndryshoi = false;
+            string gjedjapaseps = "";
+
+            foreach (var i in Automati)//per cdo kalim te automatit shikojme nese gjendja  kalon diku me epsilon
+            {
+                kalimetObject = (Kalimet)i;
+                if (gjen == kalimetObject.gjendjanisjes)
+                {
+                    if (eps == kalimetObject.alfabetkalimi)
+                    {
+                        gjendjeeeee.Add(kalimetObject.gjendjemberritjes.ToString());
+                    }
+
+                }
+            }
+
+            gjendje = new Gjendje(gjendjeeeee);
+
+            do//kontrollojme nese gjendjet e gjetura shkojne diku me epsilon perseri nqs po shtojme gjenjdet e reja ne array
+            {
+                int c = 0;
+                foreach (var i in gjendje.gjendje)
+                {
+                    c++;
+                }
+
+                int pozicperseri = 0;
+                while (pozicperseri < c)
+                {
+                    gjedjapaseps = gjendje.getgjendja(pozicperseri);
+                    foreach (var i in Automati)
+                    {
+                        kalimetObject = (Kalimet)i;
+                        if (gjedjapaseps == kalimetObject.gjendjanisjes)
+                        {
+                            if (eps == kalimetObject.alfabetkalimi && !gjendjeeeee.Contains(gjedjapaseps))
+                            {
+                                gjendjeeeee.Add(kalimetObject.gjendjemberritjes.ToString());
+                                ndryshoi = true;
+                                gjendje.Zbraz();//fshim objektin dhe e mbushim perseri me arraylistene  re te krijuar me ndryshime
+                            }
+
+                        }
+                    }
+                    pozicperseri++;
+
+                }
+                gjendje = new Gjendje(gjendjeeeee);
+
+            } while (ndryshoi);
+
+           
+                    pasalfabetit = Kontrollalfabet(alfabetiautomatit, gjendje);
+
+                    //kontrolli me shkronj alfabeti
+
+                    foreach (var gjendjepasalfabetit in pasalfabetit)//per cdo gjendje te kthyer nga kontrolli siper kontrollojme nese ashkojne diku m eepsilon 
+                    {
+                        string shkronje = (string)gjendjepasalfabetit;
+                        pasepsilon2 = Kontrollopasalf(shkronje, eps);//letu esht ekontrolli i dyte me epsilon mbyllje
+                        Arraiperfundimtarpershkronje.AddRange(pasepsilon2);
+                    }
+
+                    Arraiperfundimtarpershkronje.Add(alfabetiautomatit);
+                
+            
+
+            return Arraiperfundimtarpershkronje;
+
+        }
+
+        public List<string> Kthenefjale( List<string> fjale,ArrayList gjendjet)//metoda e cila do kthej ne string arrayn qe ktheht nga afjd e njeres gjendje.
+        {
+           
+            foreach (var i in gjendjet)
+            {
+                string gjendjeperf = (string)i;
+                if(!fjale.Contains(gjendjeperf))
+                {
+                    if (gjendjeperf == "a" || gjendjeperf == "b")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        fjale.Add(gjendjeperf);
+                    }
+                }
+            }
+            fjale.Sort();
+            return fjale;
+        }
 
 
 

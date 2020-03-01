@@ -9,7 +9,7 @@ namespace TeoriGjuheProjekt
     class Program
     {
         static void Main(string[] args)
-        {
+         {
             //int counter = 0;
             //string line;
 
@@ -44,8 +44,8 @@ namespace TeoriGjuheProjekt
             //a.AfishoKalime();
 
             //a.Konverto(gj1,a1);
-            //a.Konvertohappashapi(gj1,a1);
-            a.KonvertoneAFD(gj1, a1);
+            a.Konvertohappashapi(gj1,a1);
+            //a.KonvertoneAFD(gj1, a1);
              System.Console.ReadLine();
         }
     }
