@@ -36,6 +36,9 @@ namespace TeoriGjuheProjekt
 
             Gjendje gj1 = new Gjendje();
             gj1.FutGJendjet();
+
+            Gjendje gjperfundimtare = new Gjendje();
+            gjperfundimtare.lexofundore();
             //gj1.AfishoGjendjet();
             //System.Console.ReadLine();
 
@@ -43,9 +46,10 @@ namespace TeoriGjuheProjekt
             a.MbushmeKalime();
             //a.AfishoKalime();
 
-            //a.Konverto(gj1,a1);
-            a.Konvertohappashapi(gj1,a1);
+            a.Minimizo(gjperfundimtare, gj1, a1);
+            //a.Konvertohappashapi(gj1,a1);
             //a.KonvertoneAFD(gj1, a1);
+            //a.AfishoFundore(gjperfundimtare);
              System.Console.ReadLine();
         }
     }

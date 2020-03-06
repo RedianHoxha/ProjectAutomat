@@ -34,6 +34,24 @@ namespace TeoriGjuheProjekt
             file.Close();
         }
 
+
+
+        public void lexofundore()
+        {
+            gjendje = new ArrayList();
+
+            string line;
+
+            // Read the file and display it line by line.  
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\GjendjeFundore.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                gjendje.Add(line);
+            }
+
+            file.Close();
+        }
+
         public void Zbraz()
         {
             gjendje.Clear();

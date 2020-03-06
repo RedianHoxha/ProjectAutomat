@@ -26,7 +26,7 @@ namespace TeoriGjuheProjekt
             string line;
 
             // Read the file and display it line by line.  
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\TeoriGjuhesh\TeoriGjuheProjekt\Prov\Alfabet.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Alfabet.txt");
             while ((line = file.ReadLine()) != null)
             {
                 alfabeti.Add(line);
