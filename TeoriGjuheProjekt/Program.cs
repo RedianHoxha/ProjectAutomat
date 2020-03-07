@@ -46,10 +46,11 @@ namespace TeoriGjuheProjekt
             a.MbushmeKalime();
             //a.AfishoKalime();
 
-            a.Minimizo(gjperfundimtare, gj1, a1);
+            //a.Minimizo(gjperfundimtare, gj1, a1);
             //a.Konvertohappashapi(gj1,a1);
             //a.KonvertoneAFD(gj1, a1);
             //a.AfishoFundore(gjperfundimtare);
+            a.Minimizo(gjperfundimtare, gj1, a1);
              System.Console.ReadLine();
         }
     }

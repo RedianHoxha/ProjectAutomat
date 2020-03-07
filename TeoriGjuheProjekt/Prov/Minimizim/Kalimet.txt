@@ -1,0 +1,15 @@
+q0aq1
+q0cq4
+q0bq0
+q1bq0
+q1cq1
+q1aq3
+q2cq2
+q2bq0
+q2aq3
+q3aq2
+q3cq2
+q3bq0
+q4aq1
+q4bq3
+q4cq2

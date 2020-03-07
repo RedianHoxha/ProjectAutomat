@@ -24,7 +24,7 @@ namespace TeoriGjuheProjekt
             string line;
 
             // Read the file and display it line by line.  
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Gjendje.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Minimizim\Gjendjemini.txt");
             while ((line = file.ReadLine()) != null)
             {
                 gjendje.Add(line);
@@ -43,7 +43,7 @@ namespace TeoriGjuheProjekt
             string line;
 
             // Read the file and display it line by line.  
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\GjendjeFundore.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Minimizim\Gjendjeminifund.txt");
             while ((line = file.ReadLine()) != null)
             {
                 gjendje.Add(line);

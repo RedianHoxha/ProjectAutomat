@@ -62,7 +62,7 @@ namespace TeoriGjuheProjekt
                   string line;
 
                 // Read the file and display it line by line.  
-                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Kalimet.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Github\ProjectAutomat\TeoriGjuheProjekt\Prov\Minimizim\Kalimet.txt");
                     while ((line = file.ReadLine()) != null)
                     {
                             string gjendje1, shkralfabet, gjendjefund;
@@ -557,22 +557,13 @@ namespace TeoriGjuheProjekt
             ArrayList GjendjeJoFundore = new ArrayList();
             ArrayList GjithGjendjet = new ArrayList();
             ArrayList gjendjeshenjuara = new ArrayList();
-            string gjendja1, gjendja2,gjendjadyshe;
+            string gjendja1, gjendja2,gjendjadyshe,gjendjaqeshenjohet;
             //GjendjeJoFundore.AddRange(gjendjeautomati.gjendje);//kopjojme gjith gjendjet
             GjendjeFundore = KtheFundore(gjendjefundore);//kemi gjendjet fundore
-            GjithGjendjet=HiqtePaArritshme(gjendjeautomati);
+            GjithGjendjet=HiqtePaArritshme(gjendjeautomati);//gjendjet e arritshme
+            GjendjeJoFundore = Kthejofundore(GjendjeFundore, gjendjeautomati);//gjendjet jo fundore
+            gjendjeshenjuara = GjendjeShenjuara(GjendjeFundore, GjendjeJoFundore);//gjendjet e shenjuara
 
-            gjendjeshenjuara = GjendjeShenjuara(GjendjeFundore, GjendjeJoFundore);
-
-            foreach (var i in gjendjeautomati.gjendje)
-            {
-                string gjendje = (string)i;
-                if (!GjendjeFundore.Contains(gjendje))
-                {
-                    GjendjeJoFundore.Add(gjendje);
-                    
-                }
-            }
             do
             {
                 ushtua = false;
@@ -585,32 +576,110 @@ namespace TeoriGjuheProjekt
                         {
                             foreach (var i in alfabetautomati.alfabeti)//per cdo dhkronje alfabeti kontrollojme nese rgjendje te arrayt t kthyer shkojne diku me kete shkronje alfabeti
                             {
-                                if ((string)i != "e")
-                                {
+                                
                                     gjendja1 = gjendjamberritjes((string)GjithGjendjet[rresht], (string)i);
                                     gjendja2 = gjendjamberritjes((string)GjithGjendjet[kolon], (string)i);
                                     gjendjadyshe = gjendja1 + gjendja2;
 
-                                    if (!gjendjeshenjuara.Contains(gjendjadyshe))
+                                    if (gjendjeshenjuara.Contains(gjendjadyshe))
                                     {
-                                        gjendjeshenjuara.Add(gjendjadyshe);
-                                        ushtua = true;
 
+                                        gjendjaqeshenjohet = (string)GjithGjendjet[rresht] + (string)GjithGjendjet[kolon];
+
+                                            if (!gjendjeshenjuara.Contains(gjendjaqeshenjohet))
+                                            {
+                                                    gjendjeshenjuara.Add(gjendjaqeshenjohet);
+                                                    ushtua = true;
+                                            }
                                     }
-
-                                }
                             }
                         }
-
-
-
-                    }//kolon
-                }//rresht
+                    }
+                }
             } while (ushtua);
-            
+
+            //afisho(gjendjeshenjuara);
 
 
-        }//metoda
+            ArrayList gjithciftetemundshme = new ArrayList();
+            ArrayList gjendjetepashenjuara = new ArrayList();
+            ArrayList gjendjebashkohet = new ArrayList();
+            string p1, p2;
+            gjithciftetemundshme = Gjithgjendjet(gjendjeautomati);
+
+            foreach(var i in gjithciftetemundshme)
+            {
+                string gjen = (string)i;
+                if(!gjendjeshenjuara.Contains(gjen))
+                {
+                    gjendjetepashenjuara.Add(gjen);
+                }
+            }
+
+            foreach(string fjal in gjendjetepashenjuara)
+            {
+                p1 = fjal.Substring(0, 2);
+                p2 = fjal.Substring(2, 2);
+                if(!gjendjebashkohet.Contains(p1))
+                {
+                    gjendjebashkohet.Add(p1);
+                }
+                if(!gjendjebashkohet.Contains(p2))
+                {
+                    gjendjebashkohet.Add(p2);
+                }
+                p1 = "";
+                p2 = "";
+            }
+            afisho(gjendjebashkohet);
+        }
+
+
+
+
+
+        public ArrayList Gjithgjendjet(Gjendje gjendjeautomati)
+        {
+            ArrayList arr = new ArrayList();
+            string ciftgjendje = "";
+            for(int rresht=0;rresht< gjendjeautomati.gjendje.Count;rresht++)
+            {
+                for(int kolon=0;kolon< gjendjeautomati.gjendje.Count;kolon++)
+                {
+                    if(rresht!=kolon)
+                    {
+                        ciftgjendje = gjendjeautomati.getgjendja(rresht) + gjendjeautomati.getgjendja(kolon);
+                        arr.Add(ciftgjendje);
+                        ciftgjendje = "";
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+        public void afisho(ArrayList arr)
+
+        {
+            string fjale = "";
+            Console.WriteLine("Gjith ciftet e mundshme jane:");
+            for (int i = 0; i < arr.Count; i++)
+            {
+                fjale = fjale + arr[i].ToString();
+            }
+           Console.Write(fjale);
+        }
+
+        public string bashkoarraylist (ArrayList arr)
+        {
+            string fjale = "";
+            Console.WriteLine("Gjith ciftet e mundshme jane:");
+            for (int i = 0; i < arr.Count; i++)
+            {
+                fjale = fjale + arr[i].ToString();
+            }
+           return fjale;
+        }
 
 
         public ArrayList GjendjeShenjuara(ArrayList fundore,ArrayList jofundore)
@@ -622,9 +691,10 @@ namespace TeoriGjuheProjekt
                 for (int kolon = 0; kolon < jofundore.Count; kolon++)
                 {
                     gjen = gjen + fundore[rresht] + jofundore[kolon];
+                    shenjuara.Add(gjen);
+                    gjen = "";
                 }
-                shenjuara.Add(gjen);
-                gjen = "";
+
             }
 
             for (int rresht = 0; rresht < jofundore.Count; rresht++)
@@ -632,15 +702,34 @@ namespace TeoriGjuheProjekt
                 for (int kolon = 0; kolon < fundore.Count; kolon++)
                 {
                     gjen = gjen + jofundore[rresht] + fundore[kolon];
+                    shenjuara.Add(gjen);
+                    gjen = "";
                 }
-                shenjuara.Add(gjen);
-                gjen = "";
+
             }
 
 
             return shenjuara;
         }
+        
 
+
+        public ArrayList Kthejofundore(ArrayList fundore,Gjendje gjendjeautomati)
+        {
+            ArrayList arrayjofundore = new ArrayList();
+
+            foreach(var i in gjendjeautomati.gjendje)
+            {
+                string gjendja = (string)i;
+                if(!fundore.Contains(gjendja))
+                {
+                    arrayjofundore.Add(gjendja);
+                }
+            }
+
+
+            return arrayjofundore;
+        }
         public string gjendjamberritjes(string gjendjanisjes, string shkronjalf)
         {
             string mberritje = "";
@@ -745,6 +834,12 @@ namespace TeoriGjuheProjekt
             ArrayList arrgjendjesh = new ArrayList();
             Kalimet kalimetObject = new Kalimet();
             string eps = "e";
+
+            foreach(var i in arraymegjendje.gjendje)
+            {
+                string gjen = (string)i;
+                arrgjendjesh.Add(gjen);
+            }
 
             foreach(var i in Automati)
             {
